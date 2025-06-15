@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+
+        <!-- Step 1: Define the Action -->
+        <record id="action_hms_patient" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Step 2: Define the Top-Level Menu -->
+        <menuitem id="menu_hms_root" name="HMS"/>
+
+        <!-- Step 3: Sub-menu that uses the action -->
+        <menuitem id="menu_hms_patient"
+                  name="Patients"
+                  parent="menu_hms_root"
+                  action="action_hms_patient"/>
+
+        <!-- Step 4: Tree View -->
+        <record id="view_hms_patient_tree" model="ir.ui.view">
+            <field name="name">hms.patient.tree</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="age"/>
+                    <field name="blood_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Step 5: Form View -->
+        <record id="view_hms_patient_form" model="ir.ui.view">
+            <field name="name">hms.patient.form</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                        </group>
+                        <group>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="blood_type"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
