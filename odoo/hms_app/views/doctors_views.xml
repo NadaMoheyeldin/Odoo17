@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <!-- Action -->
+        <record id="action_hms_doctors" model="ir.actions.act_window">
+            <field name="name">Doctors</field>
+            <field name="res_model">hms_app.doctors</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_hms_root" name="HMS"/>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_hms_doctors"
+                  name="Doctors"
+                  parent="menu_hms_root"
+                  action="action_hms_doctors"/>
+
+        <!-- Tree View -->
+        <record id="view_hms_doctors_tree" model="ir.ui.view">
+            <field name="name">hms_app.doctors.tree</field>
+            <field name="model">hms_app.doctors</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="image" widget="image" options='{"preview_image": "image_small"}'/>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_hms_doctors_form" model="ir.ui.view">
+            <field name="name">hms_app.doctors.form</field>
+            <field name="model">hms_app.doctors</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="image" widget="image"
+                                   options='{"preview_image": "image_small"}'/>
+
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
