@@ -26,6 +26,7 @@
                     <field name="image" widget="image" options='{"preview_image": "image_small"}'/>
                     <field name="first_name"/>
                     <field name="last_name"/>
+                    <field name="email"/>
                     <field name="age"/>
                     <field name="blood_type"/>
                     <field name="state" widget="statusbar"/>
@@ -46,6 +47,7 @@
                                    options='{"preview_image": "image_small"}'/>
                             <field name="first_name"/>
                             <field name="last_name"/>
+                            <field name="email"/>
                         </group>
                         <group>
                             <field name="birth_date"/>

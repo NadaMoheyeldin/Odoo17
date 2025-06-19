@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import  ValidationError
+import re
 
 class HmsPatient(models.Model):
     _name = "hms_app.patient"
@@ -31,6 +32,7 @@ class HmsPatient(models.Model):
         ('fair', 'Fair'),
         ('serious', 'Serious')
     ], string="Status", default='undetermined')
+    email=fields.Char(string="Email",required=True)
 
 
     department_id = fields.Many2one("hms_app.department", string="Department",
@@ -44,6 +46,7 @@ class HmsPatient(models.Model):
 
 
     )
+
 
     # New field for logs
     log_ids = fields.One2many("hms_app.patient.log", "patient_id", string="State Change Logs")
@@ -89,3 +92,22 @@ class HmsPatient(models.Model):
                     'message': "You can now select doctors for this department"
                 }
             }
+
+    @api.constrains('email')
+    def _check_email_format(self):
+        for record in self:
+            if record.email:
+                email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+                if not re.match(email_regex, record.email):
+                    raise ValidationError("Invalid email format. Please enter a valid email address.")
+
+    @api.constrains('email')
+    def _check_email_uniqueness(self):
+        """
+        Ensure the email is unique.
+        """
+        for record in self:
+            if record.email:
+                existing_patient = self.search([('email', '=', record.email), ('id', '!=', record.id)])
+                if existing_patient:
+                    raise ValidationError("This email address is already in use by another patient.")
